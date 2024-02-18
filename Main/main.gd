@@ -28,7 +28,7 @@ func _ready():
 	generate_cards(num_cards / 2 , x)
 	
 	shuffle_cards()
-	
+	$Music/Back_ground_music.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -97,10 +97,15 @@ func on_card_flipped(card):
 		print(card1.value)
 		print(card.value)
 		if card1.value == card.value:
+			
 			points += 1
 			
+			get_tree().call_group("cards", "not_clickable")
+			await get_tree().create_timer(0.75).timeout
+			$Music/Match_found.play()
 			card1.queue_free()
 			card.queue_free()
+			get_tree().call_group("cards", "is_clickable")
 			card1 = null
 		else:
 			get_tree().call_group("cards", "not_clickable")

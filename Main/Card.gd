@@ -20,6 +20,8 @@ func _ready():
 	add_to_group("cards")
 	add_to_group(str(value))
 	
+	$card_face.texture = load(picture)
+	$Label.text = str(value)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,7 +41,8 @@ func _on_card_area_input_event(viewport, event, shape_idx):
 
 
 func flip_card():
-	$flip_timer.start()
+	#get_tree().call_group("cards", "not_clickable")
+	#$flip_timer.start()
 	
 	if flipped == false:
 		flip_animation = $AnimationPlayer.libraries.get("").get_animation("Flip_right")
@@ -64,6 +67,7 @@ func _on_card_area_mouse_exited():
 # timer to fix glitch where you click while the card is turning
 func _on_flip_timer_timeout():
 	#clickable = true
+#	get_tree().call_group("cards", "is_clickable")
 	pass
 
 func not_clickable():

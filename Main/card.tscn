@@ -1,43 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmo6xl6djg5bd"]
+[gd_scene load_steps=13 format=3 uid="uid://bmo6xl6djg5bd"]
 
 [ext_resource type="Script" path="res://Main/Card.gd" id="1_mbdfi"]
 [ext_resource type="Texture2D" uid="uid://c5dsrcml4fdc" path="res://PixelCard_Assets/Cards/Card_Back_Blue_Old 2.png" id="2_mqt6k"]
 [ext_resource type="Texture2D" uid="uid://c3cspugt3l6mo" path="res://PixelCard_Assets/Cards/Card_Selected05_ThickOuterBorder66x98.png" id="3_qew3d"]
 [ext_resource type="Texture2D" uid="uid://beb6uxacgdavu" path="res://PixelCard_Assets/Cards/Card_flip_right_blue.png" id="3_wck6d"]
 [ext_resource type="Texture2D" uid="uid://bpjuipi1t418d" path="res://PixelCard_Assets/Cards/Clubs/Card_2Clubs.png" id="4_j2xbq"]
+[ext_resource type="Texture2D" uid="uid://uql8gmtslahb" path="res://PixelCard_Assets/Cards/Joker.png" id="6_5jpwc"]
 [ext_resource type="Texture2D" uid="uid://data6lvtbf75l" path="res://PixelCard_Assets/Cards/Card_flip_left_blue.png" id="6_q30j8"]
-
-[sub_resource type="Animation" id="Animation_dv2y7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Card_sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_mqt6k")]
-}
-
-[sub_resource type="Animation" id="Animation_q0fee"]
-resource_name = "Flip_right"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Card_sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("2_mqt6k"), ExtResource("3_wck6d"), ExtResource("4_j2xbq")]
-}
 
 [sub_resource type="Animation" id="Animation_3rur6"]
 resource_name = "Flip_back"
@@ -54,6 +23,74 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("2_mqt6k"), ExtResource("6_q30j8"), ExtResource("2_mqt6k")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_face:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_q0fee"]
+resource_name = "Flip_right"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card_sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_mqt6k"), ExtResource("3_wck6d"), ExtResource("6_5jpwc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_face:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_dv2y7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card_sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_mqt6k")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_face:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e62u3"]
@@ -90,6 +127,16 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="card_area"]
 visible = false
 shape = SubResource("RectangleShape2D_8bs18")
+
+[node name="card_face" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_j2xbq")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -29.0
+offset_top = -73.0
+offset_right = 11.0
+offset_bottom = -50.0
 
 [connection signal="timeout" from="flip_timer" to="." method="_on_flip_timer_timeout"]
 [connection signal="input_event" from="card_area" to="." method="_on_card_area_input_event"]

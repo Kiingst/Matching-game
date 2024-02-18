@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dnyjd5id8f1m2"
+path="res://.godot/imported/Jingle - Failure 2.wav-4ebcbd890342a7c43686286acaeae9c8.sample"
+
+[deps]
+
+source_file="res://Chill Jazz Music Pack Easy Loop .WAV/Jingle - Failure 2.wav"
+dest_files=["res://.godot/imported/Jingle - Failure 2.wav-4ebcbd890342a7c43686286acaeae9c8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
