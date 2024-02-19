@@ -93,16 +93,19 @@ label_settings = SubResource("LabelSettings_r60a3")
 
 [node name="Music" parent="." instance=ExtResource("4_o7476")]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(199, 348)
-sprite_frames = ExtResource("5_b2nmi")
-frame_progress = 0.200213
+[node name="Shuffle" type="Node" parent="."]
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(510, 351)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Shuffle"]
+position = Vector2(361, 331)
 sprite_frames = ExtResource("5_b2nmi")
-frame = 7
-frame_progress = 0.0768458
+frame = 4
+frame_progress = 0.23318
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Shuffle"]
+position = Vector2(362, 330)
+sprite_frames = ExtResource("5_b2nmi")
+frame = 4
+frame_progress = 0.287639
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

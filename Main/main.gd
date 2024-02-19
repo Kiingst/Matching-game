@@ -18,6 +18,8 @@ var maxy = 416
 var card1 
 var points = 0
 
+var cards
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	num_cards = sizex * sizey
@@ -25,7 +27,23 @@ func _ready():
 	print(x)
 	generate_cards(num_cards / 2 , x)
 	
+	
+	
 	shuffle_cards()
+	get_tree().call_group("cards", "not_clickable")
+	get_tree().call_group("cards", "not_visible")
+	cards = $Cards.get_children()
+	
+	place_dummy_cards(cards)
+	
+	
+	#play shuffle animation
+		#place dummy cards 
+		#have dummy cards position 
+		#have the animation go to the positon of the card and make that on card visible 
+	
+	get_tree().call_group("cards", "is_clickable")
+	get_tree().call_group("cards", "make_visible")
 	$Music/Back_ground_music.play()
 
 
@@ -131,5 +149,7 @@ func shuffle_cards():
 		#cards_shuffled[i].position = cards_temp[i].position
 
 
-
+func place_dummy_cards(cards):
+	
+	pass
 

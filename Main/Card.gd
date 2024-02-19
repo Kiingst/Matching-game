@@ -12,13 +12,15 @@ var value
 var picture
 var front_picture
 var test_string = "ion know"
+var card_back : String
 
-var testing = "res://PixelCard_Assets/Cards/Card_Back_Blue_New.png"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("cards")
 	add_to_group(str(value))
+	set_card_color()
 	
 	$card_face.texture = load(picture)
 	$Label.text = str(value)
@@ -26,6 +28,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	if (hovered == true) or (flipped == true):
 		$outline.visible = true
 	else:
@@ -70,9 +73,20 @@ func _on_flip_timer_timeout():
 #	get_tree().call_group("cards", "is_clickable")
 	pass
 
+func set_card_color():
+	card_back = Global.set_card_color()
+	$Card_sprite.texture = load(card_back)
+
 func not_clickable():
 	clickable = false
 	
 
 func is_clickable():
 	clickable = true
+
+func not_visible():
+	self.visible = false
+	
+
+func make_visible():
+	self.visible = true

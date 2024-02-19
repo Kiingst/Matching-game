@@ -1,5 +1,8 @@
 extends Node
 
+var card_color = 3
+
+var was_animation_node_changed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -118,3 +121,21 @@ func get_card_face(number):
 			return "res://PixelCard_Assets/Cards/Spades/Card_QueenSpade.png"
 		_:
 			return "not a valid number"
+
+func set_card_color():
+	was_animation_node_changed = false
+	match card_color:
+		1: 
+			return "res://PixelCard_Assets/Cards/Card_Back_Blue_New.png"
+		2:
+			return "res://PixelCard_Assets/Cards/Card_Back_Dark-green_New.png"
+		3:
+			return "res://PixelCard_Assets/Cards/Card_Back_Green_New.png"
+		4:
+			return "res://PixelCard_Assets/Cards/Card_Back_Pink_New.png"
+		5:
+			return "res://PixelCard_Assets/Cards/Card_Back_Red_New.png"
+		6:
+			return "res://PixelCard_Assets/Cards/Card_Back_Yellow_New.png"
+		_:
+			pass
