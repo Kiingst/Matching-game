@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dqirunp745r4n"]
+
+[ext_resource type="Texture2D" uid="uid://bn4v6ktdywan2" path="res://PixelCard_Assets/Cards/ShuffleCards_SpriteSheet_Spacing_6px/Shupple_Cards_Blue_64x96px_274x198px.png" id="1_ty86m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5toa"]
+atlas = ExtResource("1_ty86m")
+region = Rect2(0, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wprxt"]
+atlas = ExtResource("1_ty86m")
+region = Rect2(70, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_radi7"]
+atlas = ExtResource("1_ty86m")
+region = Rect2(140, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyj64"]
+atlas = ExtResource("1_ty86m")
+region = Rect2(210, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr0rr"]
+atlas = ExtResource("1_ty86m")
+region = Rect2(0, 102, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1vrw"]
+atlas = ExtResource("1_ty86m")
+region = Rect2(70, 102, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gf485"]
+atlas = ExtResource("1_ty86m")
+region = Rect2(140, 102, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kd1t"]
+atlas = ExtResource("1_ty86m")
+region = Rect2(210, 102, 64, 96)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5toa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wprxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_radi7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyj64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr0rr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1vrw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf485")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kd1t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]

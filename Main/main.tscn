@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://7hib2gtqeyir"]
+[gd_scene load_steps=11 format=3 uid="uid://7hib2gtqeyir"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_h3yox"]
 [ext_resource type="Texture2D" uid="uid://1gpahgo2tqkt" path="res://PixelCard_Assets/Tiles/Table_Top_32x32.png" id="1_qcjsq"]
 [ext_resource type="PackedScene" uid="uid://bmo6xl6djg5bd" path="res://Main/card.tscn" id="3_4btpo"]
 [ext_resource type="PackedScene" uid="uid://bqucfcbqg0fay" path="res://Main/music.tscn" id="4_o7476"]
+[ext_resource type="SpriteFrames" uid="uid://dqirunp745r4n" path="res://Main/shuffle_frames.tres" id="5_b2nmi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xx8if"]
 texture = ExtResource("1_qcjsq")
@@ -53,6 +54,14 @@ sources/0 = SubResource("TileSetAtlasSource_xx8if")
 [sub_resource type="LabelSettings" id="LabelSettings_r60a3"]
 font_size = 40
 
+[sub_resource type="Animation" id="Animation_psvgm"]
+resource_name = "Place_cards"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmqmg"]
+_data = {
+"Place_cards": SubResource("Animation_psvgm")
+}
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h3yox")
 sizex = 6
@@ -83,3 +92,22 @@ text = "0"
 label_settings = SubResource("LabelSettings_r60a3")
 
 [node name="Music" parent="." instance=ExtResource("4_o7476")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(199, 348)
+sprite_frames = ExtResource("5_b2nmi")
+frame_progress = 0.200213
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(510, 351)
+sprite_frames = ExtResource("5_b2nmi")
+frame = 7
+frame_progress = 0.0768458
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kmqmg")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../AnimationPlayer")
