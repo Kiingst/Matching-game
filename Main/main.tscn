@@ -55,8 +55,8 @@ font_size = 40
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h3yox")
-sizex = 5
-sizey = 2
+sizex = 6
+sizey = 4
 card = ExtResource("3_4btpo")
 
 [node name="TileMap" type="TileMap" parent="."]

@@ -16,8 +16,6 @@ var maxx : float = 700
 var maxy = 416
 
 var card1 
-
-
 var points = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -34,6 +32,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$Control/Label.text = str(points)
+	if points == num_cards / 2:
+		print("you win")
 
 
 func generate_unique_random_numbers(amount):
@@ -103,6 +103,7 @@ func on_card_flipped(card):
 			get_tree().call_group("cards", "not_clickable")
 			await get_tree().create_timer(0.75).timeout
 			$Music/Match_found.play()
+			$Music/Match_found.pitch_scale += 0.05
 			card1.queue_free()
 			card.queue_free()
 			get_tree().call_group("cards", "is_clickable")

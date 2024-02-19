@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqucfcbqg0fay"]
 
 [ext_resource type="AudioStream" uid="uid://47vy1wiu54r2" path="res://Chill Jazz Music Pack Easy Loop .WAV/Chill Out, Man.wav" id="1_qfkxh"]
-[ext_resource type="AudioStream" uid="uid://dor2qxthtcqq5" path="res://Chill Jazz Music Pack Easy Loop .WAV/Jingle - Mixed Success.wav" id="2_fmpi3"]
+[ext_resource type="AudioStream" uid="uid://do4fff4teurfo" path="res://Chill Jazz Music Pack Easy Loop .WAV/Jingle - Failure 1.wav" id="2_nj5q6"]
 
 [node name="Music" type="Node"]
 
@@ -10,5 +10,17 @@ stream = ExtResource("1_qfkxh")
 volume_db = -20.0
 
 [node name="Match_found" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_fmpi3")
+stream = ExtResource("2_nj5q6")
+volume_db = -20.0
+
+[node name="Good_job" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_nj5q6")
+volume_db = -20.0
+
+[node name="excellent" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_nj5q6")
+volume_db = -20.0
+
+[node name="Great" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_nj5q6")
 volume_db = -20.0
