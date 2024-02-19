@@ -3,11 +3,12 @@ extends Node2D
 @export var sizex : int
 @export var sizey : int 
 @export var card : PackedScene 
+@export var dummy_card : PackedScene
 
 var margin = 4
-var num_cards
+var num_cards : int
 
-var card_maker_counter = 0
+var card_maker_counter : int = 0
 
 var xcounter : float = 1.0
 var ycounter : float = 1.0
@@ -22,7 +23,10 @@ var cards
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	$Music/Back_ground_music.play()
 	num_cards = sizex * sizey
+	
 	var x = generate_unique_random_numbers(num_cards / 2)
 	print(x)
 	generate_cards(num_cards / 2 , x)
@@ -34,22 +38,25 @@ func _ready():
 	get_tree().call_group("cards", "not_visible")
 	cards = $Cards.get_children()
 	
-	place_dummy_cards(cards)
-	
+	place_dummy_cards()
+	await get_tree().create_timer(1.0).timeout
+	get_tree().call_group("dummy_cards", "move_to_shuffle_point")
+	await get_tree().create_timer(5.0).timeout
+	$AnimationPlayer.play("Shuffle_cards")
 	
 	#play shuffle animation
 		#place dummy cards 
 		#have dummy cards position 
 		#have the animation go to the positon of the card and make that on card visible 
 	
-	get_tree().call_group("cards", "is_clickable")
-	get_tree().call_group("cards", "make_visible")
-	$Music/Back_ground_music.play()
+	#get_tree().call_group("cards", "is_clickable")
+	#get_tree().call_group("cards", "make_visible")
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$Control/Label.text = str(points)
+	$Control/HBoxContainer/Label.text = str(points)
 	if points == num_cards / 2:
 		print("you win")
 
@@ -91,7 +98,7 @@ func generate_cards(amount, value):
 		c2.value = value[i]
 		$Cards.add_child(c)
 		$Cards.add_child(c2)
-		
+
 
 func get_next_card_pos():
 	#var temp = Vector2($Marker2D.position.x + ($Marker2D.position.x * xcounter) , $Marker2D.position.y + (104 * ycounter))
@@ -112,10 +119,8 @@ func on_card_flipped(card):
 	if card1 == null:
 		card1 = card
 	else:
-		print(card1.value)
-		print(card.value)
 		if card1.value == card.value:
-			
+			print("cards match")
 			points += 1
 			
 			get_tree().call_group("cards", "not_clickable")
@@ -127,13 +132,14 @@ func on_card_flipped(card):
 			get_tree().call_group("cards", "is_clickable")
 			card1 = null
 		else:
+			print("cards no match")
 			get_tree().call_group("cards", "not_clickable")
 			await get_tree().create_timer(0.5).timeout
 			card1.flip_card()
 			card.flip_card()
 			get_tree().call_group("cards", "is_clickable")
 			card1 = null
-			
+
 
 
 func shuffle_cards():
@@ -149,7 +155,19 @@ func shuffle_cards():
 		#cards_shuffled[i].position = cards_temp[i].position
 
 
-func place_dummy_cards(cards):
+func place_dummy_cards():
 	
-	pass
+	for i in $Cards.get_children().size() :
+		var c = dummy_card.instantiate()
+		
+		c.position = $Cards.get_children()[i].position
+		$Dummy_Card.add_child(c)
 
+
+
+func _on_button_pressed():
+	print(Global.card_color)
+	Global.card_color += 1
+	if Global.card_color > 6:
+		Global.card_color = 1
+	get_tree().call_group("cards", "set_card_color")

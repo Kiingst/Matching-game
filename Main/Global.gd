@@ -1,6 +1,6 @@
 extends Node
 
-var card_color = 3
+var card_color = 5
 
 var was_animation_node_changed = false
 
@@ -123,7 +123,6 @@ func get_card_face(number):
 			return "not a valid number"
 
 func set_card_color():
-	was_animation_node_changed = false
 	match card_color:
 		1: 
 			return "res://PixelCard_Assets/Cards/Card_Back_Blue_New.png"
@@ -137,5 +136,22 @@ func set_card_color():
 			return "res://PixelCard_Assets/Cards/Card_Back_Red_New.png"
 		6:
 			return "res://PixelCard_Assets/Cards/Card_Back_Yellow_New.png"
+		_:
+			pass
+
+func get_flip_card_color():
+	match card_color:
+		1: 
+			return ["res://PixelCard_Assets/Cards/Card_flip_left_blue.png","res://PixelCard_Assets/Cards/Card_flip_right_blue.png"]
+		2:
+			return ["res://PixelCard_Assets/Cards/Card_flip_left.png","res://PixelCard_Assets/Cards/Card_flip_right.png"]
+		3:
+			return ["res://PixelCard_Assets/Cards/Card_flip_left_lightgreen.png","res://PixelCard_Assets/Cards/Card_flip_right_lightgreen.png"]
+		4:
+			return ["res://PixelCard_Assets/Cards/Card_flip_left_pink.png","res://PixelCard_Assets/Cards/Card_flip_right_pink.png"]
+		5:
+			return ["res://PixelCard_Assets/Cards/Card_flip_left_red.png","res://PixelCard_Assets/Cards/Card_flip_right_red.png"]
+		6:
+			return ["res://PixelCard_Assets/Cards/Card_flip_left_yellow.png","res://PixelCard_Assets/Cards/Card_flip_right_yellow.png"]
 		_:
 			pass

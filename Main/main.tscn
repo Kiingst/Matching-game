@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://7hib2gtqeyir"]
+[gd_scene load_steps=14 format=3 uid="uid://7hib2gtqeyir"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_h3yox"]
 [ext_resource type="Texture2D" uid="uid://1gpahgo2tqkt" path="res://PixelCard_Assets/Tiles/Table_Top_32x32.png" id="1_qcjsq"]
 [ext_resource type="PackedScene" uid="uid://bmo6xl6djg5bd" path="res://Main/card.tscn" id="3_4btpo"]
+[ext_resource type="PackedScene" uid="uid://8kj5ul0ucr2c" path="res://Main/dummy_card.tscn" id="3_cmcde"]
 [ext_resource type="PackedScene" uid="uid://bqucfcbqg0fay" path="res://Main/music.tscn" id="4_o7476"]
 [ext_resource type="SpriteFrames" uid="uid://dqirunp745r4n" path="res://Main/shuffle_frames.tres" id="5_b2nmi"]
 
@@ -54,19 +55,54 @@ sources/0 = SubResource("TileSetAtlasSource_xx8if")
 [sub_resource type="LabelSettings" id="LabelSettings_r60a3"]
 font_size = 40
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0m6y"]
+size = Vector2(344, 464)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ruqi3"]
+size = Vector2(344, 464)
+
 [sub_resource type="Animation" id="Animation_psvgm"]
-resource_name = "Place_cards"
+resource_name = "Shuffle_cards"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shuffle/AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"default", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shuffle/AnimatedSprite2D2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"default", 1.0, false],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kmqmg"]
 _data = {
-"Place_cards": SubResource("Animation_psvgm")
+"Shuffle_cards": SubResource("Animation_psvgm")
 }
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h3yox")
-sizex = 6
+sizex = 5
 sizey = 4
 card = ExtResource("3_4btpo")
+dummy_card = ExtResource("3_cmcde")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ff2e1")
@@ -75,8 +111,7 @@ layer_0/tile_data = PackedInt32Array(0, 65536, 0, 2, 131072, 0, 3, 196608, 0, 4,
 
 [node name="Cards" type="Node2D" parent="."]
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(70, 83)
+[node name="Dummy_Card" type="Node2D" parent="."]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -84,10 +119,21 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 0
-offset_right = 733.0
-offset_bottom = 475.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Control/HBoxContainer"]
+layout_mode = 2
+text = "Change Color"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(590, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_r60a3")
 
@@ -96,16 +142,38 @@ label_settings = SubResource("LabelSettings_r60a3")
 [node name="Shuffle" type="Node" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Shuffle"]
-position = Vector2(361, 331)
+position = Vector2(256, 384)
 sprite_frames = ExtResource("5_b2nmi")
 frame = 4
-frame_progress = 0.23318
+frame_progress = 0.496355
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Shuffle"]
-position = Vector2(362, 330)
+position = Vector2(512, 384)
 sprite_frames = ExtResource("5_b2nmi")
 frame = 4
 frame_progress = 0.287639
+
+[node name="Left_Side" type="Area2D" parent="Shuffle"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shuffle/Left_Side"]
+position = Vector2(188, 240)
+shape = SubResource("RectangleShape2D_h0m6y")
+
+[node name="Right_Side" type="Area2D" parent="Shuffle"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shuffle/Right_Side"]
+position = Vector2(548, 240)
+shape = SubResource("RectangleShape2D_ruqi3")
+
+[node name="markers" type="Node2D" parent="Shuffle"]
+
+[node name="Left_marker" type="Marker2D" parent="Shuffle/markers" groups=["left_marker"]]
+position = Vector2(256, 384)
+
+[node name="Right_marker" type="Marker2D" parent="Shuffle/markers" groups=["right_marker"]]
+position = Vector2(512, 384)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -114,3 +182,5 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../AnimationPlayer")
+
+[connection signal="pressed" from="Control/HBoxContainer/Button" to="." method="_on_button_pressed"]

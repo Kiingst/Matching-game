@@ -12,7 +12,7 @@ var value
 var picture
 var front_picture
 var test_string = "ion know"
-var card_back : String
+
 
 
 
@@ -51,7 +51,7 @@ func flip_card():
 		flip_animation = $AnimationPlayer.libraries.get("").get_animation("Flip_right")
 		flip_animation.track_set_key_value(0, 2, load(picture))
 		$AnimationPlayer.play("Flip_right")
-		print("card value is " , value)
+		#print("card value is " , value)
 		flipped = true
 		emit_signal("flipped_signal" , self)
 	else:
@@ -74,8 +74,19 @@ func _on_flip_timer_timeout():
 	pass
 
 func set_card_color():
-	card_back = Global.set_card_color()
+	var card_back = Global.set_card_color()
+	#array 1 is right 0 is left
+	var flip_card = Global.get_flip_card_color()
+	
 	$Card_sprite.texture = load(card_back)
+	flip_animation = $AnimationPlayer.libraries.get("").get_animation("Flip_right")
+	flip_animation.track_set_key_value(0, 0, load(card_back))
+	flip_animation.track_set_key_value(0, 1, load(flip_card[1]))
+	
+	var flip_back = $AnimationPlayer.libraries.get("").get_animation("Flip_back")
+	flip_back.track_set_key_value(0, 0, load(card_back))
+	flip_back.track_set_key_value(0, 1, load(flip_card[0]))
+	flip_back.track_set_key_value(0, 2, load(card_back))
 
 func not_clickable():
 	clickable = false
