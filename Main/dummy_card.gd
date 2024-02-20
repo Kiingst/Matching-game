@@ -7,7 +7,7 @@ var original_pos
 @export var speed : int
 
 var trip = false
-
+signal card_to_point
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_card_color()
@@ -19,10 +19,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if moving == true:
-		if global_position.distance_to(pos_to_move_to) < 1.5 :
+		if global_position.distance_to(pos_to_move_to) < 2 :
 			#queue_free()
 			moving = false
 			if trip == false:
+				emit_signal("card_to_point")
 				self.visible = false
 				trip = true
 			

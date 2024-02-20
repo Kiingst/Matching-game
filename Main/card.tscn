@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmo6xl6djg5bd"]
+[gd_scene load_steps=15 format=3 uid="uid://bmo6xl6djg5bd"]
 
 [ext_resource type="Script" path="res://Main/Card.gd" id="1_mbdfi"]
 [ext_resource type="Texture2D" uid="uid://c5dsrcml4fdc" path="res://PixelCard_Assets/Cards/Card_Back_Blue_Old 2.png" id="2_mqt6k"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bpjuipi1t418d" path="res://PixelCard_Assets/Cards/Clubs/Card_2Clubs.png" id="4_j2xbq"]
 [ext_resource type="Texture2D" uid="uid://uql8gmtslahb" path="res://PixelCard_Assets/Cards/Joker.png" id="6_5jpwc"]
 [ext_resource type="Texture2D" uid="uid://data6lvtbf75l" path="res://PixelCard_Assets/Cards/Card_flip_left_blue.png" id="6_q30j8"]
+[ext_resource type="AudioStream" uid="uid://0uwmdc0rd8u7" path="res://sounds/flipcard-91468.mp3" id="8_1r0w2"]
 
 [sub_resource type="Animation" id="Animation_3rur6"]
 resource_name = "Flip_back"
@@ -142,6 +143,10 @@ offset_right = 9.0
 offset_bottom = -27.0
 text = "42"
 label_settings = SubResource("LabelSettings_fphu2")
+
+[node name="flip_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_1r0w2")
+volume_db = -10.0
 
 [connection signal="timeout" from="flip_timer" to="." method="_on_flip_timer_timeout"]
 [connection signal="input_event" from="card_area" to="." method="_on_card_area_input_event"]

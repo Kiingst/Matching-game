@@ -110,7 +110,7 @@ func get_card_face(number):
 		47:
 			return "res://PixelCard_Assets/Cards/Spades/Card_9Spades.png"
 		48:
-			return "res://PixelCard_Assets/Cards/Spades/Card_10Spades.png"
+			return "res://PixelCard_Assets/Cards/Spades/Card_10spades.png"
 		49:
 			return "res://PixelCard_Assets/Cards/Spades/Card_AceSpade_Big.png"
 		50:

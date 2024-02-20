@@ -9,7 +9,7 @@ size = Vector2(64, 96)
 [node name="dummy_card" type="Sprite2D"]
 texture = ExtResource("1_lr2aa")
 script = ExtResource("1_c7yy2")
-speed = 100
+speed = 200
 
 [node name="dummy_card" type="Area2D" parent="."]
 

@@ -153,6 +153,7 @@ func place_dummy_cards():
 		
 		c.position = $Cards.get_children()[i].position
 		c.original_pos = c.position
+		c.connect("card_to_point",Callable(self,"make_shuffle_visible"))
 		$Dummy_Card.add_child(c)
 
 
@@ -173,16 +174,20 @@ func play_start_animation():
 	place_dummy_cards()
 	await get_tree().create_timer(1.0).timeout
 	get_tree().call_group("dummy_cards", "move_to_shuffle_point")
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(2.5).timeout
 	$AnimationPlayer.play("Shuffle_cards")
 	await get_tree().create_timer(1.5).timeout
 	get_tree().call_group("dummy_cards", "move_to_middle")
 	await get_tree().create_timer(3.0).timeout
 	get_tree().call_group("dummy_cards", "move_back")
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(2.5).timeout
 	get_tree().call_group("dummy_cards", "queue_free")
 	
 	#play start sound
 	
 	get_tree().call_group("cards", "is_clickable")
 	get_tree().call_group("cards", "make_visible")
+
+func make_shuffle_visible():
+	$Shuffle/Left_deck.visible = true
+	$Shuffle/Right_deck.visible = true
