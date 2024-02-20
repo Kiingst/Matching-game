@@ -34,23 +34,14 @@ func _ready():
 	
 	
 	shuffle_cards()
-	get_tree().call_group("cards", "not_clickable")
-	get_tree().call_group("cards", "not_visible")
-	cards = $Cards.get_children()
 	
-	place_dummy_cards()
-	await get_tree().create_timer(1.0).timeout
-	get_tree().call_group("dummy_cards", "move_to_shuffle_point")
-	await get_tree().create_timer(5.0).timeout
-	$AnimationPlayer.play("Shuffle_cards")
-	
+	play_start_animation()
 	#play shuffle animation
 		#place dummy cards 
 		#have dummy cards position 
 		#have the animation go to the positon of the card and make that on card visible 
 	
-	#get_tree().call_group("cards", "is_clickable")
-	#get_tree().call_group("cards", "make_visible")
+	
 	
 
 
@@ -161,6 +152,7 @@ func place_dummy_cards():
 		var c = dummy_card.instantiate()
 		
 		c.position = $Cards.get_children()[i].position
+		c.original_pos = c.position
 		$Dummy_Card.add_child(c)
 
 
@@ -171,3 +163,26 @@ func _on_button_pressed():
 	if Global.card_color > 6:
 		Global.card_color = 1
 	get_tree().call_group("cards", "set_card_color")
+
+
+func play_start_animation():
+	get_tree().call_group("cards", "not_clickable")
+	get_tree().call_group("cards", "not_visible")
+	cards = $Cards.get_children()
+	
+	place_dummy_cards()
+	await get_tree().create_timer(1.0).timeout
+	get_tree().call_group("dummy_cards", "move_to_shuffle_point")
+	await get_tree().create_timer(5.0).timeout
+	$AnimationPlayer.play("Shuffle_cards")
+	await get_tree().create_timer(1.5).timeout
+	get_tree().call_group("dummy_cards", "move_to_middle")
+	await get_tree().create_timer(3.0).timeout
+	get_tree().call_group("dummy_cards", "move_back")
+	await get_tree().create_timer(5.0).timeout
+	get_tree().call_group("dummy_cards", "queue_free")
+	
+	#play start sound
+	
+	get_tree().call_group("cards", "is_clickable")
+	get_tree().call_group("cards", "make_visible")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://7hib2gtqeyir"]
+[gd_scene load_steps=15 format=3 uid="uid://7hib2gtqeyir"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_h3yox"]
 [ext_resource type="Texture2D" uid="uid://1gpahgo2tqkt" path="res://PixelCard_Assets/Tiles/Table_Top_32x32.png" id="1_qcjsq"]
@@ -63,43 +63,162 @@ size = Vector2(344, 464)
 
 [sub_resource type="Animation" id="Animation_psvgm"]
 resource_name = "Shuffle_cards"
+length = 3.5
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Shuffle/AnimatedSprite2D")
+tracks/0/path = NodePath("Shuffle/Left_deck")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.5, 2.5, 3, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "values": [{
-"args": [&"default", 1.0, false],
+"args": [&"1", 1.0, false],
 "method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}, {
+"args": [&"", 1.0, false],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}, {
+"args": [],
+"method": &"queue_free"
 }]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Shuffle/AnimatedSprite2D2")
+tracks/1/path = NodePath("Shuffle/Right_deck")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [&"1", 1.0, false],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shuffle/Left_deck:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(256, 384), Vector2(256, 384), Vector2(384, 384)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shuffle/Right_deck:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(512, 384), Vector2(512, 384), Vector2(384, 384)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shuffle/Right_deck:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Shuffle/Left_deck:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_5dg8b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shuffle/Left_deck:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 384)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shuffle/Right_deck:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"default", 1.0, false],
-"method": &"play"
-}]
+"update": 0,
+"values": [Vector2(512, 384)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shuffle/Right_deck:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shuffle/Left_deck:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kmqmg"]
 _data = {
+"RESET": SubResource("Animation_5dg8b"),
 "Shuffle_cards": SubResource("Animation_psvgm")
 }
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h3yox")
-sizex = 5
+sizex = 6
 sizey = 4
 card = ExtResource("3_4btpo")
 dummy_card = ExtResource("3_cmcde")
@@ -141,17 +260,15 @@ label_settings = SubResource("LabelSettings_r60a3")
 
 [node name="Shuffle" type="Node" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Shuffle"]
+[node name="Left_deck" type="AnimatedSprite2D" parent="Shuffle"]
 position = Vector2(256, 384)
 sprite_frames = ExtResource("5_b2nmi")
-frame = 4
-frame_progress = 0.496355
+animation = &"6"
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Shuffle"]
+[node name="Right_deck" type="AnimatedSprite2D" parent="Shuffle"]
 position = Vector2(512, 384)
 sprite_frames = ExtResource("5_b2nmi")
-frame = 4
-frame_progress = 0.287639
+animation = &"1"
 
 [node name="Left_Side" type="Area2D" parent="Shuffle"]
 visible = false
@@ -175,6 +292,9 @@ position = Vector2(256, 384)
 [node name="Right_marker" type="Marker2D" parent="Shuffle/markers" groups=["right_marker"]]
 position = Vector2(512, 384)
 
+[node name="Middle_marker" type="Marker2D" parent="Shuffle/markers" groups=["middle_marker"]]
+position = Vector2(384, 384)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_kmqmg")
@@ -184,3 +304,4 @@ libraries = {
 root_node = NodePath("../AnimationPlayer")
 
 [connection signal="pressed" from="Control/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
