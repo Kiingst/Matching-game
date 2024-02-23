@@ -49,10 +49,7 @@ func flip_card():
 	
 	if flipped == false:
 		$flip_sound.play()
-		flip_animation = $AnimationPlayer.libraries.get("").get_animation("Flip_right")
-		flip_animation.track_set_key_value(0, 2, load(picture))
 		$AnimationPlayer.play("Flip_right")
-		#print("card value is " , value)
 		flipped = true
 		emit_signal("flipped_signal" , self)
 	else:
