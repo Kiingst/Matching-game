@@ -7,6 +7,7 @@
 size = Vector2(64, 96)
 
 [node name="dummy_card" type="Sprite2D"]
+visible = false
 texture = ExtResource("1_lr2aa")
 script = ExtResource("1_c7yy2")
 speed = 200

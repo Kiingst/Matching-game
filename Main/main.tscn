@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://7hib2gtqeyir"]
+[gd_scene load_steps=18 format=3 uid="uid://7hib2gtqeyir"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_h3yox"]
 [ext_resource type="Texture2D" uid="uid://1gpahgo2tqkt" path="res://PixelCard_Assets/Tiles/Table_Top_32x32.png" id="1_qcjsq"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://8kj5ul0ucr2c" path="res://Main/dummy_card.tscn" id="3_cmcde"]
 [ext_resource type="PackedScene" uid="uid://bqucfcbqg0fay" path="res://Main/music.tscn" id="4_o7476"]
 [ext_resource type="SpriteFrames" uid="uid://dqirunp745r4n" path="res://Main/shuffle_frames.tres" id="5_b2nmi"]
+[ext_resource type="FontFile" uid="uid://cfopgy60lxb3a" path="res://fonts/BACKTO1982.TTF" id="7_cj1q7"]
+[ext_resource type="AudioStream" uid="uid://bu02mw5lhpnbu" path="res://sounds/riffle-card-shuffle-104313.mp3" id="7_sfxyg"]
+[ext_resource type="Texture2D" uid="uid://dt46vpvc21y2l" path="res://PixelCard_Assets/Cards/Card_Back_Blue_New.png" id="8_5qjwy"]
+[ext_resource type="PackedScene" uid="uid://pmxo0fjrnv3d" path="res://Main/settings_menu.tscn" id="9_ijl7q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xx8if"]
 texture = ExtResource("1_qcjsq")
@@ -55,11 +59,11 @@ sources/0 = SubResource("TileSetAtlasSource_xx8if")
 [sub_resource type="LabelSettings" id="LabelSettings_r60a3"]
 font_size = 40
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0m6y"]
-size = Vector2(344, 464)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ruqi3"]
-size = Vector2(344, 464)
+[sub_resource type="LabelSettings" id="LabelSettings_e1cor"]
+font = ExtResource("7_cj1q7")
+font_size = 50
+outline_color = Color(0.658824, 0.521569, 0.215686, 1)
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_5dg8b"]
 length = 0.001
@@ -125,7 +129,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.5, 2.5, 3, 4.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "values": [{
-"args": [&"1", 1.0, false],
+"args": ["2", 1.0, false],
 "method": &"play"
 }, {
 "args": [],
@@ -151,7 +155,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1.5, 3.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
-"args": [&"1", 1.0, false],
+"args": ["1", 1.0, false],
 "method": &"play"
 }, {
 "args": [],
@@ -243,14 +247,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button" type="Button" parent="Control/HBoxContainer"]
-layout_mode = 2
-text = "Change Color"
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer"]
-custom_minimum_size = Vector2(590, 0)
-layout_mode = 2
-
 [node name="Label" type="Label" parent="Control/HBoxContainer"]
 layout_mode = 2
 text = "0"
@@ -264,27 +260,13 @@ label_settings = SubResource("LabelSettings_r60a3")
 visible = false
 position = Vector2(256, 384)
 sprite_frames = ExtResource("5_b2nmi")
-animation = &"6"
+animation = &"1"
 
 [node name="Right_deck" type="AnimatedSprite2D" parent="Shuffle"]
 visible = false
 position = Vector2(512, 384)
 sprite_frames = ExtResource("5_b2nmi")
 animation = &"1"
-
-[node name="Left_Side" type="Area2D" parent="Shuffle"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shuffle/Left_Side"]
-position = Vector2(188, 240)
-shape = SubResource("RectangleShape2D_h0m6y")
-
-[node name="Right_Side" type="Area2D" parent="Shuffle"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shuffle/Right_Side"]
-position = Vector2(548, 240)
-shape = SubResource("RectangleShape2D_ruqi3")
 
 [node name="markers" type="Node2D" parent="Shuffle"]
 
@@ -297,6 +279,62 @@ position = Vector2(512, 384)
 [node name="Middle_marker" type="Marker2D" parent="Shuffle/markers" groups=["middle_marker"]]
 position = Vector2(384, 384)
 
+[node name="Shuffle_sound" type="AudioStreamPlayer" parent="Shuffle"]
+stream = ExtResource("7_sfxyg")
+volume_db = -10.0
+
+[node name="Main_menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Main_menu"]
+custom_minimum_size = Vector2(600, 2.08165e-12)
+layout_mode = 0
+offset_left = 36.0
+offset_top = 54.0
+offset_right = 702.0
+offset_bottom = 447.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main_menu/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main_menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Main_menu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "CARD Matching "
+label_settings = SubResource("LabelSettings_e1cor")
+
+[node name="TextureRect" type="TextureRect" parent="Main_menu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_5qjwy")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main_menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main_menu/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Start" type="Button" parent="Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Settings" type="Button" parent="Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="MarginContainer" type="MarginContainer" parent="Main_menu/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(2.08165e-12, 250)
+layout_mode = 2
+
+[node name="Settings_Menu" parent="." instance=ExtResource("9_ijl7q")]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_kmqmg")
@@ -305,5 +343,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../AnimationPlayer")
 
-[connection signal="pressed" from="Control/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="back" from="Settings_Menu" to="." method="_on_settings_menu_back"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

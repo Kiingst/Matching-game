@@ -23,19 +23,9 @@ var cards
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	$Music/Back_ground_music.play()
 	num_cards = sizex * sizey
 	
-	var x = generate_unique_random_numbers(num_cards / 2)
-	print(x)
-	generate_cards(num_cards / 2 , x)
 	
-	
-	
-	shuffle_cards()
-	
-	play_start_animation()
 	#play shuffle animation
 		#place dummy cards 
 		#have dummy cards position 
@@ -151,37 +141,45 @@ func place_dummy_cards():
 	for i in $Cards.get_children().size() :
 		var c = dummy_card.instantiate()
 		
-		c.position = $Cards.get_children()[i].position
-		c.original_pos = c.position
+		c.position = $Shuffle/markers/Middle_marker.position
+		c.original_pos = $Cards.get_children()[i].position
 		c.connect("card_to_point",Callable(self,"make_shuffle_visible"))
+		c.visible = false
 		$Dummy_Card.add_child(c)
 
 
 
-func _on_button_pressed():
-	print(Global.card_color)
-	Global.card_color += 1
-	if Global.card_color > 6:
-		Global.card_color = 1
-	get_tree().call_group("cards", "set_card_color")
-
-
 func play_start_animation():
+	
 	get_tree().call_group("cards", "not_clickable")
 	get_tree().call_group("cards", "not_visible")
 	cards = $Cards.get_children()
 	
 	place_dummy_cards()
-	await get_tree().create_timer(1.0).timeout
-	get_tree().call_group("dummy_cards", "move_to_shuffle_point")
-	await get_tree().create_timer(2.5).timeout
+	#await get_tree().create_timer(1.0).timeout
+	#await get_tree().create_timer(2.5).timeout
+	var shuffle_ani = $AnimationPlayer.libraries.get("").get_animation("Shuffle_cards")
+	var x = shuffle_ani.track_get_key_value(0,0)
+	var y = x.get("args")
+	y[0] = str(Global.card_color)
+	x["args"] = y
+	shuffle_ani.track_set_key_value(0,0 , x)
+	shuffle_ani.track_set_key_value(1,0 , x)
+	
+	
+	
+	
 	$AnimationPlayer.play("Shuffle_cards")
+	$Shuffle/Shuffle_sound.play()
+	
 	await get_tree().create_timer(1.5).timeout
 	get_tree().call_group("dummy_cards", "move_to_middle")
 	await get_tree().create_timer(3.0).timeout
+	$Main_menu.visible = false
 	get_tree().call_group("dummy_cards", "move_back")
 	await get_tree().create_timer(2.5).timeout
 	get_tree().call_group("dummy_cards", "queue_free")
+	
 	
 	#play start sound
 	
@@ -191,3 +189,32 @@ func play_start_animation():
 func make_shuffle_visible():
 	$Shuffle/Left_deck.visible = true
 	$Shuffle/Right_deck.visible = true
+
+
+func _on_start_pressed():
+	$Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Start.visible = false
+	$Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Settings.visible = false
+	var x = generate_unique_random_numbers(num_cards / 2)
+	print(x)
+	generate_cards(num_cards / 2 , x)
+	shuffle_cards()
+	
+	play_start_animation()
+
+
+func _on_settings_pressed():
+	open_setting_menu()
+
+
+func open_main_menu():
+	$Settings_Menu.visible = false
+	$Main_menu.visible = true
+
+func open_setting_menu():
+	$Main_menu.visible = false
+	$Settings_Menu.visible = true
+
+
+
+func _on_settings_menu_back():
+	open_main_menu()

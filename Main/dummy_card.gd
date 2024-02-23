@@ -6,7 +6,6 @@ var moving: bool = false
 var original_pos
 @export var speed : int
 
-var trip = false
 signal card_to_point
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,12 +21,6 @@ func _process(delta):
 		if global_position.distance_to(pos_to_move_to) < 2 :
 			#queue_free()
 			moving = false
-			if trip == false:
-				emit_signal("card_to_point")
-				self.visible = false
-				trip = true
-			
-			
 			
 		#start to move
 		var direction = (pos_to_move_to - global_position).normalized()
@@ -36,15 +29,6 @@ func _process(delta):
 func set_card_color():
 	card_back = Global.set_card_color()
 
-
-func move_to_shuffle_point():
-	
-	if "Right_Side" in $dummy_card.get_overlapping_areas()[0].name:
-		pos_to_move_to = get_tree().get_nodes_in_group("right_marker")[0].global_position
-		moving = true
-	elif "Left_Side" in $dummy_card.get_overlapping_areas()[0].name:
-		pos_to_move_to = get_tree().get_nodes_in_group("left_marker")[0].global_position
-		moving = true
 
 func move_back():
 	pos_to_move_to = original_pos

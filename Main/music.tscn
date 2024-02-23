@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqucfcbqg0fay"]
+[gd_scene load_steps=5 format=3 uid="uid://bqucfcbqg0fay"]
 
+[ext_resource type="Script" path="res://Main/music.gd" id="1_avf4d"]
 [ext_resource type="AudioStream" uid="uid://47vy1wiu54r2" path="res://Chill Jazz Music Pack Easy Loop .WAV/Chill Out, Man.wav" id="1_qfkxh"]
 [ext_resource type="AudioStream" uid="uid://do4fff4teurfo" path="res://Chill Jazz Music Pack Easy Loop .WAV/Jingle - Failure 1.wav" id="2_nj5q6"]
 [ext_resource type="AudioStream" uid="uid://lexd81xh3hvs" path="res://sounds/shuffleandcardflip1-40942.mp3" id="3_xd6nd"]
 
 [node name="Music" type="Node"]
+script = ExtResource("1_avf4d")
 
 [node name="Back_ground_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_qfkxh")
