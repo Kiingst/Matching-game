@@ -10,7 +10,6 @@ script = ExtResource("1_avf4d")
 
 [node name="Back_ground_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_qfkxh")
-volume_db = -20.0
 
 [node name="Match_found" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_nj5q6")

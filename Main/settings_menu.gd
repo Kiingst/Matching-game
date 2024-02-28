@@ -8,11 +8,13 @@ var music
 func _ready():
 	music = get_tree().get_nodes_in_group("music")[0].Backgound_music_name
 	#$Label.text = music.stream.get_stream_name()
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/music/Music_Label.text = music
+	get_tree().get_nodes_in_group("music")[0].get_child(0).volume_db = $MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Music_volume.value
 
 
 func _on_blue_pressed():
@@ -62,3 +64,7 @@ func _on_music_back_pressed():
 func _on_music_forward_pressed():
 	get_tree().get_nodes_in_group("music")[0].music_back()
 	music = get_tree().get_nodes_in_group("music")[0].Backgound_music_name
+
+
+func _on_music_volume_drag_ended(value_changed):
+	pass # Replace with function body.

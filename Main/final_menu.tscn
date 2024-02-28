@@ -1,26 +1,26 @@
-[gd_scene load_steps=10 format=3 uid="uid://pmxo0fjrnv3d"]
+[gd_scene load_steps=10 format=3 uid="uid://cf4nub25scib1"]
 
-[ext_resource type="Script" path="res://Main/settings_menu.gd" id="1_77qq5"]
-[ext_resource type="FontFile" uid="uid://cfopgy60lxb3a" path="res://fonts/BACKTO1982.TTF" id="1_h6u3u"]
-[ext_resource type="Texture2D" uid="uid://dt46vpvc21y2l" path="res://PixelCard_Assets/Cards/Card_Back_Blue_New.png" id="2_h2igu"]
-[ext_resource type="Texture2D" uid="uid://be03mvjxamnmh" path="res://PixelCard_Assets/Cards/Card_Back_Dark-green_New.png" id="3_1ypdl"]
-[ext_resource type="Texture2D" uid="uid://dy4orcl2tbkm5" path="res://PixelCard_Assets/Cards/Card_Back_Green_New.png" id="4_sesot"]
-[ext_resource type="Texture2D" uid="uid://5cgplrxvvlkf" path="res://PixelCard_Assets/Cards/Card_Back_Pink_New.png" id="5_vlkhk"]
-[ext_resource type="Texture2D" uid="uid://qrkw2x63pmyf" path="res://PixelCard_Assets/Cards/Card_Back_Red_New.png" id="6_akqkb"]
-[ext_resource type="Texture2D" uid="uid://cs5chkbk8nlib" path="res://PixelCard_Assets/Cards/Card_Back_Yellow_New.png" id="7_8ksbr"]
+[ext_resource type="Script" path="res://Main/final_menu.gd" id="1_7xyr8"]
+[ext_resource type="FontFile" uid="uid://cfopgy60lxb3a" path="res://fonts/BACKTO1982.TTF" id="2_5upx6"]
+[ext_resource type="Texture2D" uid="uid://dt46vpvc21y2l" path="res://PixelCard_Assets/Cards/Card_Back_Blue_New.png" id="3_t6qii"]
+[ext_resource type="Texture2D" uid="uid://be03mvjxamnmh" path="res://PixelCard_Assets/Cards/Card_Back_Dark-green_New.png" id="4_a0p17"]
+[ext_resource type="Texture2D" uid="uid://dy4orcl2tbkm5" path="res://PixelCard_Assets/Cards/Card_Back_Green_New.png" id="5_espgy"]
+[ext_resource type="Texture2D" uid="uid://5cgplrxvvlkf" path="res://PixelCard_Assets/Cards/Card_Back_Pink_New.png" id="6_qon0y"]
+[ext_resource type="Texture2D" uid="uid://qrkw2x63pmyf" path="res://PixelCard_Assets/Cards/Card_Back_Red_New.png" id="7_3p1rq"]
+[ext_resource type="Texture2D" uid="uid://cs5chkbk8nlib" path="res://PixelCard_Assets/Cards/Card_Back_Yellow_New.png" id="8_viols"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e1cor"]
-font = ExtResource("1_h6u3u")
+font = ExtResource("2_5upx6")
 font_size = 50
 outline_color = Color(0.658824, 0.521569, 0.215686, 1)
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="Settings_Menu" type="Control"]
+[node name="final_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_77qq5")
+script = ExtResource("1_7xyr8")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(600, 2.08165e-12)
@@ -40,16 +40,20 @@ layout_mode = 2
 custom_minimum_size = Vector2(140, 2.08165e-12)
 layout_mode = 2
 
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_t6qii")
+
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Settings"
+text = "You WIN"
 label_settings = SubResource("LabelSettings_e1cor")
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_h2igu")
+texture = ExtResource("3_t6qii")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -58,68 +62,53 @@ size_flags_horizontal = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 30)
 layout_mode = 2
-text = "Click to change the color of the cards"
+
+[node name="Stats" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "
+"
 
 [node name="CardBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Blue" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/CardBox"]
 layout_mode = 2
-icon = ExtResource("2_h2igu")
+icon = ExtResource("3_t6qii")
 
 [node name="Dark_Green" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/CardBox"]
 layout_mode = 2
-icon = ExtResource("3_1ypdl")
+icon = ExtResource("4_a0p17")
 
 [node name="Light_Green" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/CardBox"]
 layout_mode = 2
-icon = ExtResource("4_sesot")
+icon = ExtResource("5_espgy")
 
 [node name="Pink" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/CardBox"]
 layout_mode = 2
-icon = ExtResource("5_vlkhk")
+icon = ExtResource("6_qon0y")
 
 [node name="Red" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/CardBox"]
 layout_mode = 2
-icon = ExtResource("6_akqkb")
+icon = ExtResource("7_3p1rq")
 
 [node name="Yellow" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/CardBox"]
 layout_mode = 2
-icon = ExtResource("7_8ksbr")
+icon = ExtResource("8_viols")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 20)
+custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 
 [node name="Card_selected" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="music" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+[node name="play_again" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Music_Back" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/music"]
-layout_mode = 2
-text = "<<"
-
-[node name="Music_Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/music"]
-layout_mode = 2
-text = "Song Name"
-
-[node name="Music_Forward" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/music"]
-layout_mode = 2
-text = ">>"
-
-[node name="Music_volume" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
-layout_mode = 2
-min_value = -30.0
-max_value = 2.08165e-12
-
-[node name="Back_Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
-layout_mode = 2
-text = "Back"
+text = "Play Again"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(2.08165e-12, 220)
@@ -131,7 +120,4 @@ layout_mode = 2
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/CardBox/Pink" to="." method="_on_pink_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/CardBox/Red" to="." method="_on_red_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/CardBox/Yellow" to="." method="_on_yellow_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/music/Music_Back" to="." method="_on_music_back_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/music/Music_Forward" to="." method="_on_music_forward_pressed"]
-[connection signal="drag_ended" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Music_volume" to="." method="_on_music_volume_drag_ended"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Back_Button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/play_again" to="." method="_on_play_again_pressed"]

@@ -37,9 +37,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$Control/HBoxContainer/Label.text = str(points)
-	if points == num_cards / 2:
-		print("you win")
+	#$Control/HBoxContainer/Label.text = str(points)
+	#if points == num_cards / 2:
+	#	win_game()
+	#	points = 0
+	
+	#$Control/HBoxContainer/Combos.text = str(Stats.combos)
+	#$Control/HBoxContainer/Cards_fliped.text = str(Stats.cards_flipped)
+	#$Control/HBoxContainer/Failed.text = str(Stats.pairs_failed)
+	pass
 
 
 func generate_unique_random_numbers(amount):
@@ -98,6 +104,7 @@ func get_next_card_pos():
 
 func on_card_flipped(card):
 	if card1 == null:
+		Stats.stats_card_flipped(null)
 		card1 = card
 	else:
 		if card1.value == card.value:
@@ -106,15 +113,20 @@ func on_card_flipped(card):
 			
 			get_tree().call_group("cards", "not_clickable")
 			await get_tree().create_timer(0.75).timeout
+			Stats.stats_card_flipped(true)
 			$Music/Match_found.play()
-			$Music/Match_found.pitch_scale += 0.05
+			$Music/Match_found.pitch_scale += 0.01
 			card1.queue_free()
 			card.queue_free()
 			get_tree().call_group("cards", "is_clickable")
 			card1 = null
+			if points == num_cards / 2:
+				win_game()
+				points = 0
 		else:
 			print("cards no match")
 			get_tree().call_group("cards", "not_clickable")
+			Stats.stats_card_flipped(false)
 			await get_tree().create_timer(0.5).timeout
 			card1.flip_card()
 			card.flip_card()
@@ -207,6 +219,8 @@ func _on_settings_pressed():
 
 
 func open_main_menu():
+	$Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Start.visible = true
+	$Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Settings.visible = true
 	$Settings_Menu.visible = false
 	$Main_menu.visible = true
 
@@ -217,4 +231,14 @@ func open_setting_menu():
 
 
 func _on_settings_menu_back():
+	open_main_menu()
+
+func win_game():
+	$Main_menu.visible = false
+	$Settings_Menu.visible = false
+	$final_menu.visible = true
+	
+
+
+func _on_final_menu_play_again():
 	open_main_menu()

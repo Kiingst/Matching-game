@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://7hib2gtqeyir"]
+[gd_scene load_steps=19 format=3 uid="uid://7hib2gtqeyir"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_h3yox"]
 [ext_resource type="Texture2D" uid="uid://1gpahgo2tqkt" path="res://PixelCard_Assets/Tiles/Table_Top_32x32.png" id="1_qcjsq"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bu02mw5lhpnbu" path="res://sounds/riffle-card-shuffle-104313.mp3" id="7_sfxyg"]
 [ext_resource type="Texture2D" uid="uid://dt46vpvc21y2l" path="res://PixelCard_Assets/Cards/Card_Back_Blue_New.png" id="8_5qjwy"]
 [ext_resource type="PackedScene" uid="uid://pmxo0fjrnv3d" path="res://Main/settings_menu.tscn" id="9_ijl7q"]
+[ext_resource type="PackedScene" uid="uid://cf4nub25scib1" path="res://Main/final_menu.tscn" id="11_5w0ua"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xx8if"]
 texture = ExtResource("1_qcjsq")
@@ -237,6 +238,7 @@ layer_0/tile_data = PackedInt32Array(0, 65536, 0, 2, 131072, 0, 3, 196608, 0, 4,
 [node name="Dummy_Card" type="Node2D" parent="."]
 
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -251,6 +253,15 @@ offset_bottom = 40.0
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_r60a3")
+
+[node name="Combos" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="Failed" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="Cards_fliped" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
 
 [node name="Music" parent="." instance=ExtResource("4_o7476")]
 
@@ -335,6 +346,9 @@ layout_mode = 2
 [node name="Settings_Menu" parent="." instance=ExtResource("9_ijl7q")]
 visible = false
 
+[node name="final_menu" parent="." instance=ExtResource("11_5w0ua")]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_kmqmg")
@@ -346,4 +360,5 @@ root_node = NodePath("../AnimationPlayer")
 [connection signal="pressed" from="Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Main_menu/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="back" from="Settings_Menu" to="." method="_on_settings_menu_back"]
+[connection signal="play_again" from="final_menu" to="." method="_on_final_menu_play_again"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
