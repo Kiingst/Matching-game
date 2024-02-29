@@ -16,6 +16,7 @@ func _process(delta):
 
 func reload_Music():
 	$Back_ground_music.stream = load(get_song_from_music_num()[0])
+	$Back_ground_music.stream.loop_mode = 1
 	$Back_ground_music.play()
 	Backgound_music_name = get_song_from_music_num()[1]
 

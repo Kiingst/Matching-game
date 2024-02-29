@@ -137,6 +137,7 @@ visible = false
 texture = ExtResource("4_j2xbq")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -31.0
 offset_top = -50.0
 offset_right = 9.0
